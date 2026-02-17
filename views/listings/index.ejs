@@ -1,10 +1,175 @@
 <% layout("/layouts/boilerplate") %>
-<h3>All Listings</h3>
-<!-- <form action="/listings/new" method="get">
-        <button>Create New Listings</button>
-    </form> -->
-
-<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+  }
+  .filter {
+    text-align: center;
+    margin-right: 1.2rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+    text-decoration: none;
+    color: inherit;
+    transition: border-bottom 0.2s, color 0.2s;
+    white-space: nowrap;
+    font-size: 1rem;
+  }
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  .filter p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+  }
+  .filter.active {
+    border-bottom: 2px solid #fe424d;
+    opacity: 1;
+    color: #fe424d;
+  }
+  .all {
+    margin-left: 1rem;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+    border-radius: 8px;
+    padding: 0.5rem 0;
+  }
+  .dropdown-content a {
+    color: #222;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+  }
+  .dropdown-content a.active {
+    color: #fe424d;
+    font-weight: bold;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  @media (max-width: 700px) {
+    #filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 0.2rem;
+    }
+    .filter {
+      margin-right: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .hide-mobile {
+      display: none !important;
+    }
+    .dropdown {
+      display: inline-block;
+    }
+  }
+  .tax-info{
+    display: none;
+  }
+  .tax-toggle{
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.5rem;
+    padding: 1rem;
+    margin-left: 2.5rem;
+    display: flex;
+    align-items: center;
+  }
+</style>
+<div id="filters">
+  <a href="/listings" class="filter all <%= !selectedCategory ? 'active' : '' %>">
+    <div><i class="fa-solid fa-globe"></i></div>
+    <p>All</p>
+  </a>
+  <a href="/listings?category=trending" class="filter <%= selectedCategory === 'trending' ? 'active' : '' %>">
+    <div><i class="fas fa-fire"></i></div>
+    <p>Trending</p>
+  </a>
+  <a href="/listings?category=rooms" class="filter <%= selectedCategory === 'rooms' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </a>
+  <a href="/listings?category=iconic" class="filter <%= selectedCategory === 'iconic' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-mountain-city"></i></div>
+    <p>Iconic Cities</p>
+  </a>
+  <a href="/listings?category=mountains" class="filter <%= selectedCategory === 'mountains' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Mountains</p>
+  </a>
+  <!-- Hide these on mobile, show in dropdown -->
+  <a href="/listings?category=castles" class="filter hide-mobile <%= selectedCategory === 'castles' ? 'active' : '' %>">
+    <div><i class="fa-brands fa-fort-awesome"></i></div>
+    <p>Castles</p>
+  </a>
+  <a href="/listings?category=pools" class="filter hide-mobile <%= selectedCategory === 'pools' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+    <p>Amazing Pools</p>
+  </a>
+  <a href="/listings?category=camping" class="filter hide-mobile <%= selectedCategory === 'camping' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>Camping</p>
+  </a>
+  <a href="/listings?category=farms" class="filter hide-mobile <%= selectedCategory === 'farms' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-cow"></i></div>
+    <p>Farms</p>
+  </a>
+  <a href="/listings?category=arctic" class="filter hide-mobile <%= selectedCategory === 'arctic' ? 'active' : '' %>">
+    <div><i class="fa-regular fa-snowflake"></i></div>
+    <p>Arctic</p>
+  </a>
+  <!-- Dropdown for extra categories on mobile -->
+  <div class="dropdown">
+    <a class="filter dropdown-toggle" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="display: none;">
+      <div><i class="fa-solid fa-ellipsis-h"></i></div>
+      <p>More</p>
+    </a>
+    <div class="dropdown-content">
+      <a href="/listings?category=castles" class="<%= selectedCategory === 'castles' ? 'active' : '' %>"><i class="fa-brands fa-fort-awesome"></i> Castles</a>
+      <a href="/listings?category=pools" class="<%= selectedCategory === 'pools' ? 'active' : '' %>"><i class="fa-solid fa-person-swimming"></i> Amazing Pools</a>
+      <a href="/listings?category=camping" class="<%= selectedCategory === 'camping' ? 'active' : '' %>"><i class="fa-solid fa-campground"></i> Camping</a>
+      <a href="/listings?category=farms" class="<%= selectedCategory === 'farms' ? 'active' : '' %>"><i class="fa-solid fa-cow"></i> Farms</a>
+      <a href="/listings?category=arctic" class="<%= selectedCategory === 'arctic' ? 'active' : '' %>"><i class="fa-regular fa-snowflake"></i> Arctic</a>
+    </div>
+  </div>
+  <div class="tax-toggle ms-auto" style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border:1.5px solid #222;border-radius:2rem;background:#fff;font-size:1.1rem;font-weight:500;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+    <label class="form-check-label" for="flexSwitchCheckDefault" style="margin-right:0.5rem;">Display total after taxes</label>
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" style="width:2rem;height:1.2rem;">
+  </div>
+</div>
+<script>
+// Show dropdown only on mobile
+function handleDropdownDisplay() {
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  if (window.innerWidth <= 700) {
+    dropdownToggle.style.display = 'inline-block';
+  } else {
+    dropdownToggle.style.display = 'none';
+  }
+}
+window.addEventListener('resize', handleDropdownDisplay);
+window.addEventListener('DOMContentLoaded', handleDropdownDisplay);
+</script>
+<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
   <% for (let listing of alllisting) { %>
   <a href="/listings/<%= listing._id %>" class="listing-link">
     <div class="card col listing-card">
@@ -20,11 +185,23 @@
       <div class="card-body">
         <p class="card-text">
           <b><%= listing.title %> </b> <br />
+          <span class="badge bg-secondary"><%= listing.category %></span><br />
           Price: &#8377; <%= listing.price ?
           listing.price.toLocaleString("en-IN") : "N/A" %> / night
+          <i class="tax-info"> &nbsp;+&nbsp;18% GST</i>
         </p>
       </div>
     </div>
   </a>
   <% } %>
 </div>
+
+<script>
+  const taxToggle = document.getElementById('flexSwitchCheckDefault');
+  taxToggle.addEventListener("click", ()=>{
+    let taxInfo = document.querySelectorAll('.tax-info');
+    for(info of taxInfo){
+      info.style.display = taxToggle.checked ? 'inline' : 'none'; 
+    }
+  })
+</script>

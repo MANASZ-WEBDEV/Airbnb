@@ -4,114 +4,131 @@ const sampleListings = [
     description: "Relax in this charming beachfront cottage with ocean views.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+      url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", // trending (Bali Jungle)
     },
     price: 1500,
     location: "Malibu",
     country: "United States",
+    category: ["trending"],
+    geometry: { type: "Point", coordinates: [-118.7798, 34.0259] },
   },
   {
     title: "Modern Loft in Downtown",
     description: "Stylish loft apartment in the heart of the city.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1493809842364-78817add7ffb",
+      url: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80", // iconic (NYC)
     },
     price: 1200,
     location: "New York",
     country: "United States",
+    category: ["iconic"],
+    geometry: { type: "Point", coordinates: [-74.0060, 40.7128] },
   },
   {
     title: "Mountain Retreat Cabin",
     description: "Peaceful wooden cabin surrounded by mountains.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000",
+      url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80", // mountains (Aspen)
     },
     price: 900,
     location: "Aspen",
     country: "United States",
+    category: ["mountains"],
+    geometry: { type: "Point", coordinates: [-106.8370, 39.1911] },
   },
   {
     title: "Luxury Villa with Pool",
     description: "Private villa with infinity pool and sea view.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      url: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80", // pools (Santorini)
     },
     price: 3000,
     location: "Santorini",
     country: "Greece",
+    category: ["pools"],
+    geometry: { type: "Point", coordinates: [25.4600, 36.3932] },
   },
   {
     title: "Desert Glamping Tent",
     description: "Experience luxury camping under the stars.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+      url: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80", // camping (Jaisalmer)
     },
     price: 600,
     location: "Jaisalmer",
     country: "India",
+    category: ["camping"],
+    geometry: { type: "Point", coordinates: [69.3187, 26.9157] },
   },
   {
     title: "Lakefront Wooden House",
     description: "Beautiful house right next to a serene lake.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1475856034135-6b0eacb5b4d8",
+      url: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=800&q=80", // pools (Zurich)
     },
     price: 1400,
     location: "Zurich",
     country: "Switzerland",
+    category: ["pools"],
+    geometry: { type: "Point", coordinates: [8.5417, 47.3769] },
   },
   {
     title: "Tokyo Studio Apartment",
     description: "Compact and modern studio in central Tokyo.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1494526585095-c41746248156",
+      url: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80", // iconic (Tokyo)
     },
     price: 1100,
     location: "Tokyo",
     country: "Japan",
+    category: ["iconic"],
+    geometry: { type: "Point", coordinates: [139.6917, 35.6895] },
   },
   {
     title: "Parisian Romantic Flat",
     description: "Cozy flat with Eiffel Tower views.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae",
+      url: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80", // iconic (Paris)
     },
     price: 1800,
     location: "Paris",
     country: "France",
+    category: ["iconic"],
+    geometry: { type: "Point", coordinates: [2.3522, 48.8566] },
   },
   {
     title: "Countryside Farmhouse",
     description: "Traditional farmhouse surrounded by greenery.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1505691723518-36a5ac3be353",
+      url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", // farms (Tuscany)
     },
     price: 800,
     location: "Tuscany",
     country: "Italy",
+    category: ["farms"],
+    geometry: { type: "Point", coordinates: [11.2558, 43.7696] },
   },
   {
     title: "Beach Shack in Goa",
     description: "Simple beachside shack perfect for sunsets.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+      url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", // trending (Goa)
     },
     price: 500,
     location: "Goa",
     country: "India",
+    category: ["trending"],
+    geometry: { type: "Point", coordinates: [73.7636, 15.2993] },
   },
-
-  // 25 more 👇
-
   {
     title: "Dubai Skyline Apartment",
     description: "Luxury apartment with Burj Khalifa view.",
@@ -122,6 +139,8 @@ const sampleListings = [
     price: 2500,
     location: "Dubai",
     country: "UAE",
+    category: ["iconic", "rooms", "trending"],
+    geometry: { type: "Point", coordinates: [55.2962, 25.276987] },
   },
   {
     title: "Bali Jungle Villa",
@@ -133,6 +152,8 @@ const sampleListings = [
     price: 1700,
     location: "Bali",
     country: "Indonesia",
+    category: ["pools", "trending", "rooms"],
+    geometry: { type: "Point", coordinates: [115.1889, -8.4095] },
   },
   {
     title: "London City Apartment",
@@ -144,6 +165,8 @@ const sampleListings = [
     price: 2000,
     location: "London",
     country: "UK",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [-0.1276, 51.5074] },
   },
   {
     title: "Sydney Beach House",
@@ -155,6 +178,8 @@ const sampleListings = [
     price: 2100,
     location: "Sydney",
     country: "Australia",
+    category: ["pools", "iconic"],
+    geometry: { type: "Point", coordinates: [151.2093, -33.8688] },
   },
   {
     title: "Swiss Alps Chalet",
@@ -166,6 +191,8 @@ const sampleListings = [
     price: 1900,
     location: "Interlaken",
     country: "Switzerland",
+    category: ["mountains", "arctic"],
+    geometry: { type: "Point", coordinates: [7.8627, 46.6863] },
   },
   {
     title: "New Delhi Penthouse",
@@ -177,6 +204,8 @@ const sampleListings = [
     price: 1300,
     location: "New Delhi",
     country: "India",
+    category: ["rooms", "trending"],
+    geometry: { type: "Point", coordinates: [77.2090, 28.6139] },
   },
   {
     title: "Barcelona Seaside Flat",
@@ -188,6 +217,8 @@ const sampleListings = [
     price: 1400,
     location: "Barcelona",
     country: "Spain",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [2.1734, 41.3851] },
   },
   {
     title: "Toronto Condo",
@@ -199,6 +230,8 @@ const sampleListings = [
     price: 1250,
     location: "Toronto",
     country: "Canada",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [-79.3832, 43.6532] },
   },
   {
     title: "Cape Town Ocean Villa",
@@ -210,6 +243,8 @@ const sampleListings = [
     price: 1600,
     location: "Cape Town",
     country: "South Africa",
+    category: ["pools", "trending"],
+    geometry: { type: "Point", coordinates: [18.4241, -33.9249] },
   },
   {
     title: "Iceland Glass Cabin",
@@ -221,6 +256,8 @@ const sampleListings = [
     price: 1500,
     location: "Reykjavik",
     country: "Iceland",
+    category: ["arctic", "mountains"],
+    geometry: { type: "Point", coordinates: [-21.8174, 64.1265] },
   },
 
   {
@@ -233,6 +270,8 @@ const sampleListings = [
     price: 1750,
     location: "Amsterdam",
     country: "Netherlands",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [4.9041, 52.3676] },
   },
   {
     title: "Bangkok Highrise",
@@ -244,6 +283,8 @@ const sampleListings = [
     price: 900,
     location: "Bangkok",
     country: "Thailand",
+    category: ["rooms", "trending"],
+    geometry: { type: "Point", coordinates: [100.5018, 13.7563] },
   },
   {
     title: "Maldives Overwater Bungalow",
@@ -255,6 +296,8 @@ const sampleListings = [
     price: 4000,
     location: "Maldives",
     country: "Maldives",
+    category: ["pools", "trending"],
+    geometry: { type: "Point", coordinates: [73.2207, -0.6815] },
   },
   {
     title: "San Francisco Townhouse",
@@ -266,6 +309,8 @@ const sampleListings = [
     price: 2300,
     location: "San Francisco",
     country: "United States",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [-122.4194, 37.7749] },
   },
   {
     title: "Rio Beach Apartment",
@@ -277,6 +322,8 @@ const sampleListings = [
     price: 1000,
     location: "Rio de Janeiro",
     country: "Brazil",
+    category: ["pools", "trending"],
+    geometry: { type: "Point", coordinates: [-43.1729, -22.9068] },
   },
   {
     title: "Himalayan Homestay",
@@ -288,6 +335,8 @@ const sampleListings = [
     price: 700,
     location: "Manali",
     country: "India",
+    category: ["mountains", "camping"],
+    geometry: { type: "Point", coordinates: [77.1887, 32.2396] },
   },
   {
     title: "Seoul Smart Apartment",
@@ -299,6 +348,8 @@ const sampleListings = [
     price: 1200,
     location: "Seoul",
     country: "South Korea",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [127.0276, 37.4979] },
   },
   {
     title: "Lisbon Rooftop Flat",
@@ -310,6 +361,8 @@ const sampleListings = [
     price: 1300,
     location: "Lisbon",
     country: "Portugal",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [-9.1427, 38.7369] },
   },
   {
     title: "Moscow Luxury Suite",
@@ -321,6 +374,8 @@ const sampleListings = [
     price: 1500,
     location: "Moscow",
     country: "Russia",
+    category: ["iconic", "rooms"],
+    geometry: { type: "Point", coordinates: [37.6173, 55.7558] },
   },
   {
     title: "Mexico City Loft",
@@ -332,6 +387,8 @@ const sampleListings = [
     price: 850,
     location: "Mexico City",
     country: "Mexico",
+    category: ["rooms", "trending"],
+    geometry: { type: "Point", coordinates: [-99.1332, 19.4326] },
   },
 ];
 module.exports = { data: sampleListings };

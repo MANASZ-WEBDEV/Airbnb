@@ -52,11 +52,6 @@ const sessionOptions = {
   }
 };
 
-app.get("/", (req, res) => {
-  // res.send("Hi, I am root!");
-  res.redirect("/listings");
-});
-
 app.use(session(sessionOptions));
 app.use(flash()); 
 
@@ -87,6 +82,14 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+
+// Privacy and Terms routes
+app.get("/privacy", (req, res) => {
+  res.render("privacy");
+});
+app.get("/terms", (req, res) => {
+  res.render("terms");
+});
 
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));

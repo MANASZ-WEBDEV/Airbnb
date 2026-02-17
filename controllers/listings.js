@@ -4,8 +4,13 @@ const mapBoxToken = process.env.MAP_BOX_TOKEN
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken })
 
 module.exports.index = async (req, res) => {
-  const alllisting = await Listing.find({})
-  res.render('listings/index.ejs', { alllisting })
+  const { category } = req.query; 
+  let filter = {};
+  if (category) {
+    filter.category = { $in: [category] };
+  } 
+  const alllisting = await Listing.find(filter);
+  res.render('listings/index.ejs', { alllisting, selectedCategory: category || '' });
 }
 
 module.exports.renderNewForm = (req, res) => {
@@ -48,7 +53,7 @@ module.exports.createListing = async (req, res, next) => {
     }
   }
   
-              newListing.geometry = response.body.features[0].geometry // Set the geometry from Mapbox response
+  newListing.geometry = response.body.features[0].geometry // Set the geometry from Mapbox response
 
   await newListing.save()
   req.flash('success', 'Successfully created a new listing!')
