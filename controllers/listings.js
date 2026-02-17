@@ -4,13 +4,20 @@ const mapBoxToken = process.env.MAP_BOX_TOKEN
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken })
 
 module.exports.index = async (req, res) => {
-  const { category } = req.query; 
+  const { category, q } = req.query;
   let filter = {};
   if (category) {
     filter.category = { $in: [category] };
-  } 
+  }
+  if (q && q.trim() !== '') {
+    // Search by location (city) or country, case-insensitive partial match
+    filter.$or = [
+      { location: { $regex: q, $options: 'i' } },
+      { country: { $regex: q, $options: 'i' } }
+    ];
+  }
   const alllisting = await Listing.find(filter);
-  res.render('listings/index.ejs', { alllisting, selectedCategory: category || '' });
+  res.render('listings/index.ejs', { alllisting, selectedCategory: category || '', q });
 }
 
 module.exports.renderNewForm = (req, res) => {

@@ -1,11 +1,19 @@
 <% layout("/layouts/boilerplate") %>
 <style>
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw;
+    box-sizing: border-box;
+  }
   #filters {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1.5rem;
     position: relative;
+    width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
   .filter {
     text-align: center;
@@ -17,6 +25,7 @@
     transition: border-bottom 0.2s, color 0.2s;
     white-space: nowrap;
     font-size: 1rem;
+    box-sizing: border-box;
   }
   .filter:hover {
     opacity: 1;
@@ -91,8 +100,11 @@
     height: 3.5rem;
     padding: 1rem;
     margin-left: 2.5rem;
+    margin-right: 2.5rem;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    max-width: calc(100vw - 3rem);
   }
 </style>
 <div id="filters">
@@ -169,7 +181,7 @@ function handleDropdownDisplay() {
 window.addEventListener('resize', handleDropdownDisplay);
 window.addEventListener('DOMContentLoaded', handleDropdownDisplay);
 </script>
-<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
+<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3" style="width:100vw;overflow-x:hidden;box-sizing:border-box;">
   <% for (let listing of alllisting) { %>
   <a href="/listings/<%= listing._id %>" class="listing-link">
     <div class="card col listing-card">
