@@ -153,3 +153,9 @@ body{
 /* .review-card{
   border: 1px solid black;
 } */
+
+/* Map */
+#map{
+  height: 400px;
+  width: 100vh;
+}

@@ -49,18 +49,26 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash('error', 'Listing you are looking for does not exist!')
     return res.redirect('/listings')
   }
-  res.render('listings/edit.ejs', { listing })
+  let originalImageUrl =  listing.image.url;
+  console.log(originalImageUrl + "original image url");  
+  originalImageUrl = originalImageUrl.replace('/upload', '/upload/w_250'); // Resize the image to width 300px
+  res.render('listings/edit.ejs', { listing, originalImageUrl })
 }
 
 module.exports.updateListing = async (req, res) => {
-  const { id } = req.params
-  await Listing.findByIdAndUpdate(id, req.body.listing, {
-    // Use req.body.listing
+  const { id } = req.params;
+  const listing = await Listing.findByIdAndUpdate(id, req.body.listing, {
     runValidators: true,
     new: true
-  })
-  req.flash('success', 'Listing updated successfully!')
-  res.redirect(`/listings/${id}`)
+  });
+  if (req.file) {
+    const url = req.file.path;
+    const filename = req.file.filename;
+    listing.image = { url, filename };
+    await listing.save();
+  }
+  req.flash('success', 'Listing updated successfully!');
+  res.redirect(`/listings/${id}`);
 }
 
 module.exports.deleteListing = async (req, res) => {
