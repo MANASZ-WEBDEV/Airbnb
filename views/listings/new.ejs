@@ -33,6 +33,22 @@
         name="listing[image]"
         class="form-control" required>
       </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category:</label>
+        <select id="category" name="listing[category]" class="form-control" required>
+          <option value="">Select a category</option>
+          <option value="trending">Trending</option>
+          <option value="rooms">Rooms</option>
+          <option value="iconic">Iconic</option>
+          <option value="mountains">Mountains</option>
+          <option value="castles">Castles</option>
+          <option value="pools">Pools</option>
+          <option value="camping">Camping</option>
+          <option value="farms">Farms</option>
+          <option value="arctic">Arctic</option>
+        </select>
+        <div class="invalid-feedback">Please select a category.</div>
+      </div>
       <div class="row">
         <div class="mb-3 col-md-4">
           <label for="price" class="form-label">Price (&#8377;):</label>

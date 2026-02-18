@@ -18,7 +18,11 @@ module.exports.signup = async (req, res, next) => {
       res.redirect(redirectUrl)
     })
   } catch (e) {
-    req.flash('error', e.message)
+    if (e.code === 11000 && e.keyPattern && e.keyPattern.email) {
+      req.flash('error', 'A user with that email already exists. Please use a different email or login.');
+    } else {
+      req.flash('error', e.message);
+    }
     res.redirect('/signup')
   }
 }

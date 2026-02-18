@@ -5,10 +5,36 @@ const listingSchema = Joi.object({
         title: Joi.string().required(),
         description: Joi.string().allow(""),
         // image: Joi.string().uri().allow("", null),
-         image: Joi.string().allow("", null),  // Removed .uri() - too strict for some valid URLs
+        image: Joi.string().allow("", null),  // Removed .uri() - too strict for some valid URLs
         price: Joi.number().required().min(0),
         location: Joi.string().allow(""),
         country: Joi.string().allow(""),
+        category: Joi.alternatives().try(
+            Joi.string().valid(
+                "trending",
+                "rooms",
+                "iconic",
+                "mountains",
+                "castles",
+                "pools",
+                "camping",
+                "farms",
+                "arctic"
+            ),
+            Joi.array().items(
+                Joi.string().valid(
+                    "trending",
+                    "rooms",
+                    "iconic",
+                    "mountains",
+                    "castles",
+                    "pools",
+                    "camping",
+                    "farms",
+                    "arctic"
+                )
+            )
+        ).required()
     }).required(),
 });
 module.exports = { listingSchema }; 

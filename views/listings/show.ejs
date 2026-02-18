@@ -1,13 +1,34 @@
+
 <% layout("/layouts/boilerplate") %>
+<style>
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw;
+    box-sizing: border-box;
+  }
+  .show-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  .show-card {
+    width: 100%;
+    margin: 0 auto 1.5rem auto;
+  }
+  #map {
+    width: 100% !important;
+    min-height: 300px;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+</style>
 <script>
   const mapToken = "<%= process.env.MAP_BOX_TOKEN %>";
   const listing = <%- JSON.stringify(listing) %>;
 </script>
-<div class="row mt-3">
-  <div class="col-8 offset-3">
-    <h3><%= listing.title %></h3>
-  </div>
-  <div class="card col-6 offset-3 show-card listing-card">
+<div class="show-container mt-3">
+  <h3 class="text-center"><%= listing.title %></h3>
+  <div class="card show-card listing-card">
     <img
       src="<%= listing.image.url %>"
       class="card-img-top show-img"
@@ -19,21 +40,18 @@
       </p>
       <p class="card-text"><%= listing.description %></p>
       <p class="card-text">
-        &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") :
-        "N/A" %> / night
+        &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> / night
       </p>
       <p class="card-text"><%= listing.location %></p>
       <p class="card-text"><%= listing.country %></p>
     </div>
   </div>
 
-  <br />
-
   <% if(currentUser && listing.owner._id.equals(currentUser._id)) { %>
-  <div class="btns">
+  <div class="d-flex justify-content-center gap-3 mb-3">
     <a
       href="/listings/<%= listing._id %>/edit"
-      class="btn btn-dark col-1 offset-3 edit-btn"
+      class="btn btn-dark edit-btn"
     >
       Edit
     </a>
@@ -44,7 +62,7 @@
     >
       <button
         type="submit"
-        class="btn btn-dark col-1 offset-4"
+        class="btn btn-dark"
         onclick="return confirm('Are you sure you want to delete this listing?');"
       >
         Delete
@@ -53,7 +71,7 @@
   </div>
   <% } %>
 
-  <div class="col-8 offset-3 mb-3">
+  <div class="mb-3">
     <% if(currentUser) {%>
     <hr />
     <h4>Leave a review</h4>
@@ -92,7 +110,6 @@
           name="review[comment]"
           id="comment"
           cols="30"
-          rows="4"
           class="form-control"
           required
         ></textarea>
@@ -103,7 +120,7 @@
     <hr />
     <% } %>
 
-    <% if(listing.review) {%>
+    <% if(listing.reviews && listing.reviews.length) { %>
     <div class="row">
       <p><b>All Reviews</b></p>
       <% for(let review of listing.reviews) { %>
@@ -125,7 +142,7 @@
     </div>
     <% } %>
   </div>
-  <div class="col-8 offset-3 mb-3">
+  <div class="mb-3">
     <h3>Where you'll be</h3>
     <div id="map"></div>
   </div>

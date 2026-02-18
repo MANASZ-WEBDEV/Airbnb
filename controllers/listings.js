@@ -51,7 +51,11 @@ module.exports.createListing = async (req, res, next) => {
 
   let url = req.file ? req.file.path : null // Get the image URL from Cloudinary if uploaded
   let filename = req.file ? req.file.filename : null // Get the filename from Cloudinary if uploaded
-  const newListing = new Listing(req.body.listing) // Fixed: use req.body.listing
+  // Ensure category is always an array
+  if (req.body.listing.category && !Array.isArray(req.body.listing.category)) {
+    req.body.listing.category = [req.body.listing.category];
+  }
+  const newListing = new Listing(req.body.listing)
   newListing.owner = req.user._id // Set the owner to the logged-in user
   if (url && filename) {
     newListing.image = {
@@ -75,7 +79,6 @@ module.exports.renderEditForm = async (req, res) => {
     return res.redirect('/listings')
   }
   let originalImageUrl = listing.image.url
-  console.log(originalImageUrl + 'original image url')
   originalImageUrl = originalImageUrl.replace('/upload', '/upload/w_250') // Resize the image to width 300px
   res.render('listings/edit.ejs', { listing, originalImageUrl })
 }
@@ -86,6 +89,22 @@ module.exports.updateListing = async (req, res) => {
     runValidators: true,
     new: true
   })
+  // If location has changed, update geometry using Mapbox
+  if (req.body.listing && req.body.listing.location) {
+    const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+    const mapBoxToken = process.env.MAP_BOX_TOKEN;
+    const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
+    let response = await geocodingClient
+      .forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1
+      })
+      .send();
+    if (response.body.features && response.body.features.length > 0) {
+      listing.geometry = response.body.features[0].geometry;
+      await listing.save();
+    }
+  }
   if (req.file) {
     const url = req.file.path
     const filename = req.file.filename
