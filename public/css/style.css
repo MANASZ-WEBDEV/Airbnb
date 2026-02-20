@@ -1,3 +1,50 @@
+/* Professional mobile navbar dropdown */
+@media (max-width: 900px) {
+  .navbar-collapse {
+    background: #fff !important;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 6px 0 rgba(0,0,0,0.10);
+    margin-top: 0.7rem;
+    padding: 1.2rem 1.1rem 1.1rem 1.1rem;
+    position: absolute !important;
+    top: 3.5rem;
+    left: 2vw;
+    right: 2vw;
+    z-index: 3000;
+    min-width: 90vw;
+    max-width: 96vw;
+    animation: navbar-fade-in 0.18s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes navbar-fade-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .navbar-nav {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    align-items: flex-start !important;
+  }
+  .navbar-nav .nav-link {
+    color: #222 !important;
+    font-size: 1.13rem !important;
+    font-weight: 500;
+    padding: 0.7rem 1.1rem !important;
+    border-radius: 8px;
+    margin: 0.1rem 0;
+    transition: background 0.15s, color 0.15s;
+  }
+  .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+    background: #fbeaec !important;
+    color: #fe424d !important;
+  }
+  .navbar-nav .nav-link b {
+    font-weight: 600;
+  }
+  .navbar-collapse form {
+    margin-bottom: 1.2rem;
+    width: 100%;
+  }
+}
 body{
   font-family: "Plus Jakarta Sans", sans-serif !important;
   font-optical-sizing: auto;
@@ -189,6 +236,47 @@ body{
 .f-info-links {
   display: flex;
   gap: 16px;
+}
+
+/* Responsive Reviews Section */
+
+/* Horizontal, centered reviews */
+.reviews-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.review-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 1rem;
+  width: 260px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  word-break: break-word;
+}
+@media (max-width: 700px) {
+  .reviews-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+  }
+  .review-card {
+    width: 98vw;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .f-info-links a {

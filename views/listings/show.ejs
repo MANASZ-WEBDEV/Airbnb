@@ -121,15 +121,13 @@
     <% } %>
 
     <% if(listing.reviews && listing.reviews.length) { %>
-    <div class="row">
-      <p><b>All Reviews</b></p>
+    <div class="reviews-container">
+      <p style="width:100%;text-align:left;"><b>All Reviews</b></p>
       <% for(let review of listing.reviews) { %>
-      <div class="card col-5 ms-3 mb-3">
-        <div class="card-body">
-          <h5 class="card-title">@<%= review.author.username %></h5>
-          <p class="starability-result" data-rating="<%= review.rating %>"></p>
-          <p class="card-text mb-3"><%= review.comment %></p>
-        </div>
+      <div class="review-card">
+        <h5 class="card-title">@<%= review.author.username %></h5>
+        <p class="starability-result" data-rating="<%= review.rating %>"></p>
+        <p class="card-text mb-3"><%= review.comment %></p>
         <form
           method="POST"
           action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"

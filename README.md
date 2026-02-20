@@ -1,103 +1,98 @@
-# Airbnb Clone - Project Development Log
+# Airbnb Clone Project
 
-This document tracks all changes made to the project across commits.
-
----
-
-## Commit 1: project-1 phase-a
-
-### Changes Implemented:
-- Initial project setup and structure
-- Created basic Express.js server configuration
-- Set up EJS templating engine
-- Implemented MongoDB connection and Mongoose schemas
-- Created Listing model with fields:
-  - title
-  - description
-  - image
-  - price
-  - location
-  - country
-- Set up basic routing structure
-- Created initial views:
-  - `views/layouts/boilerplate.ejs` - Main layout with Bootstrap 5.0.2 CDN integration
-  - `views/listings/index.ejs` - Listings display page with card layout
-  - `views/includes/navbar.ejs` - Navigation bar
-  - `views/includes/footer.ejs` - Footer component
-- Integrated Bootstrap 5.0.2 for responsive design
-- Added Font Awesome 7.0.1 for icons
-- Implemented flexbox grid system using Bootstrap `.row` class for listing cards
-- Created custom CSS styling (`/css/style.css`)
-- Set up basic CRUD operation routes for listings
+## Overview
+A full-stack web application inspired by Airbnb, built with Node.js, Express, MongoDB, and EJS. This project demonstrates a wide range of backend and frontend skills, including authentication, authorization, cloud integration, and interactive maps.
 
 ---
 
-## Commit 2: Add Phase-1 Part-b
+## Key Features & Skills Demonstrated
 
-### Changes Implemented:
+### 1. User Authentication & Authorization
+- Secure user registration and login (with hashed passwords)
+- Session management using `express-session` and cookies
+- Persistent login state and flash messages
+- Route protection: Only logged-in users can create, edit, or delete listings/reviews
+- Ownership checks: Only owners can modify or delete their own listings/reviews
 
-#### Full CRUD Operations for Listings:
+### 2. Listings & Reviews Management
+- Full CRUD for property listings
+- Add, edit, and delete reviews for listings
+- Average rating calculation and display
+- Input validation and error handling with Joi
 
-**1. Show Route (View Individual Listing)**
-- Created `views/listings/show.ejs` page to display detailed listing information
-- Implemented GET route `/listings/:id` to fetch and display single listing
-- Added card layout with listing image, title, description, price, location, and country
-- Price formatting with Indian Rupee symbol (&#8377;) and locale formatting
-- Added Edit and Delete buttons on show page
+### 3. Cloudinary Integration
+- Image uploads for listings stored securely on Cloudinary
+- Uses `multer` and `multer-storage-cloudinary` for file handling
 
-**2. New Listing Route (Create)**
-- Created `views/listings/new.ejs` form page for creating new listings
-- Implemented GET route `/listings/new` to display the form
-- Implemented POST route `/listings` to handle form submission
-- Form includes fields:
-  - Title with placeholder text
-  - Description (textarea)
-  - Price (number input with &#8377; symbol)
-  - Country
-  - Location
-  - All fields marked as required
-- Used responsive Bootstrap grid (col-md-4 and col-md-8) for price and country fields
-- Redirects to show page after successful creation
+### 4. Mapbox Integration
+- Interactive maps showing listing locations
+- Geocoding and map display using Mapbox SDK
 
-**3. Edit Route (Update)**
-- Created `views/listings/edit.ejs` form page for editing existing listings
-- Implemented GET route `/listings/:id/edit` to display pre-filled edit form
-- Implemented PUT route `/listings/:id` using method-override for RESTful update
-- Form pre-populated with existing listing data using EJS value attributes
-- Added image URL field (not present in new listing form)
-- Includes validation options: `runValidators: true` and `new: true`
-- Redirects to show page after successful update
+### 5. Security Best Practices
+- Password hashing with Passport.js and passport-local-mongoose
+- Input validation and sanitization
+- Secure session and cookie handling (httpOnly, expiration)
+- Environment variables managed with dotenv
 
-**4. Delete Route (Destroy)**
-- Implemented DELETE route `/listings/:id` using method-override
-- Added delete button with inline form on show page
-- Confirmation dialog: "Are you sure you want to delete this listing?"
-- Redirects to listings index page after deletion
+### 6. MVC Architecture & Code Organization
+- Clear separation of concerns: models, views, controllers, routes, middleware
+- Async/await and error-wrapping utilities for robust error handling
 
-#### Backend Configuration:
-- Added `method-override` package for PUT and DELETE requests via forms
-- Configured method-override with query parameter `_method`
-- Added `express.urlencoded({ extended: true })` for parsing form data
-- Integrated `ejs-mate` as template engine for layout inheritance
+### 7. UI/UX
+- Responsive EJS templates for all pages
+- Flash messages for user feedback
+- Modular layouts and partials (navbar, footer, etc.)
 
-#### CSS Enhancements (`public/css/style.css`):
-- **Add Button Styling**: `.add-btn` with #fe424d background color
-- **Edit Button Styling**: `.edit-btn` with #fe424d background color
-- **Show Page Styling**:
-  - `.show-img` with fixed height (30vh)
-  - `.show-card` with removed left/right padding
-- **Footer Fix**: Added `margin-top: auto` to `.footer` class for sticky footer positioning
-- Maintained consistent color scheme throughout application
-
-#### View Structure:
-- All new pages use `<% layout("/layouts/boilerplate") %>` for consistent layout
-- Responsive design with Bootstrap row and column classes
-- Proper form structure with Bootstrap form classes (form-label, form-control)
-- Consistent spacing with margin and padding utilities (mt-3, mb-3, offset-2, offset-3)
+### 8. Additional Features
+- Privacy and Terms pages
+- Static assets (CSS/JS) for enhanced interactivity and design
 
 ---
 
-## Future Commits
+## Technologies Used
+- Node.js, Express.js
+- MongoDB, Mongoose
+- EJS, EJS-Mate
+- Passport.js (authentication)
+- Cloudinary (image storage)
+- Mapbox (maps & geocoding)
+- Joi (validation)
+- connect-flash, express-session, connect-mongo
+- dotenv, method-override, multer
 
-<!-- Add new commits below -->
+---
 
+## How to Run
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up your `.env` file with MongoDB, Cloudinary, Mapbox, and session secrets
+4. Start the server: `node App.js` or `nodemon App.js`
+5. Visit `http://localhost:3000`
+
+---
+
+## Folder Structure
+- `models/` - Mongoose schemas for users, listings, reviews
+- `controllers/` - Route logic for listings, reviews, users
+- `routes/` - Express route definitions
+- `views/` - EJS templates
+- `public/` - Static assets (CSS, JS)
+- `utils/` - Error handling and async utilities
+- `cloudConfig.js` - Cloudinary configuration
+
+---
+
+## Environment Variables Example
+```
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_KEY=your_cloudinary_key
+CLOUDINARY_SECRET=your_cloudinary_secret
+MAPBOX_TOKEN=your_mapbox_token
+ATLASDB_URL=your_mongodb_connection_string
+SECRET=your_session_secret
+```
+
+---
+
+## Credits
+Developed as a major project to demonstrate full-stack web development skills.
