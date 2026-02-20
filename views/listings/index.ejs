@@ -331,37 +331,44 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3" style="width:100vw;overflow-x:hidden;box-sizing:border-box;margin-top:1.2rem;">
+<div class="row mt-4 justify-content-center">
   <% for (let listing of alllisting) { %>
-  <a href="/listings/<%= listing._id %>" class="listing-link">
-    <div class="card col listing-card">
-      <img
-        src="<%= listing.image.url %>"
-        class="card-img-top"
-        alt="listing_image"
-        style="height: 20rem"
-      />
-      <div class="card-img-overlay">
-        <!-- abcd -->
+  
+  <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
+    <a href="/listings/<%= listing._id %>" class="listing-link w-100">
+      
+      <div class="card listing-card h-100">
+        <img
+          src="<%= listing.image.url %>"
+          class="card-img-top"
+          alt="listing_image"
+        />
+
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= listing.title %></b><br/>
+
+            <% if (Array.isArray(listing.category)) { %>
+              <% listing.category.forEach(function(cat) { %>
+                <span class="badge bg-secondary"><%= cat %></span>
+              <% }); %>
+            <% } else if (listing.category) { %>
+              <span class="badge bg-secondary"><%= listing.category %></span>
+            <% } %>
+
+            <br/>
+
+            <span class="price-label">
+              <span class="main-price" data-base="<%= listing.price %>"></span>
+              <span style="font-size:0.9rem;color:#888;">/ night</span>
+            </span>
+          </p>
+        </div>
       </div>
-      <div class="card-body">
-        <p class="card-text">
-          <b><%= listing.title %> </b> <br />
-          <% if (Array.isArray(listing.category)) { %>
-            <% listing.category.forEach(function(cat) { %>
-              <span class="badge bg-secondary"><%= cat %></span>
-            <% }); %>
-          <% } else if (listing.category) { %>
-            <span class="badge bg-secondary"><%= listing.category %></span>
-          <% } %><br />
-          <span class="price-label">
-            <span style="font-weight:600;" class="main-price" data-base="<%= listing.price %>"></span>
-            <span style="font-size:0.9rem;color:#888;">/ night</span>
-          </span>
-        </p>
-      </div>
-    </div>
-  </a>
+
+    </a>
+  </div>
+
   <% } %>
 </div>
 

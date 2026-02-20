@@ -136,10 +136,6 @@ body{
   .dropdown {
     display: inline-block;
   }
-  .row-cols-lg-3 > * {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
   .listing-card {
     margin-bottom: 1rem;
   }
