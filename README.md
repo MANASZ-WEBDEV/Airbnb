@@ -18,6 +18,24 @@
 
 ---
 
+## 📸 Screenshots
+
+<div align="center">
+  <img src="homepage.png" alt="Homepage" width="45%" />
+  <img src="listing.png" alt="Listing Page" width="45%" />
+</div>
+
+<div align="center">
+  <img src="map.png" alt="Interactive Map" width="45%" />
+  <img src="loginPage.png" alt="Login Page" width="45%" />
+</div>
+
+<div align="center">
+  <img src="signupPage.png" alt="Signup Page" width="45%" />
+</div>
+
+---
+
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
@@ -238,7 +256,7 @@ This project is licensed under the MIT License — see [LICENSE](LICENSE) for de
 **Manas Rajani**
 - 🎓 3rd Year B.Tech CSE Student
 - 💼 [LinkedIn](https://linkedin.com/in/manas-rajani)
-- 📧 manasrajanidy89@gmail.com
+- 📧 [manasrajanidy89@gmail.com](mailto:manasrajanidy89@gmail.com)
 - 🌐 [wanderlust.whymanas.tech](https://wanderlust.whymanas.tech)
 
 ---
