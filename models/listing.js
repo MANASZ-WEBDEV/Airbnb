@@ -53,6 +53,14 @@ const listingSchema = new Schema({
   }
 })
 
+// Add indexes for production-like performance
+listingSchema.index({ category: 1 })
+listingSchema.index({ location: 1 })
+listingSchema.index({ country: 1 })
+listingSchema.index({ owner: 1 })
+listingSchema.index({ geometry: '2dsphere' }) // For geospatial queries
+listingSchema.index({ title: 'text', location: 'text', country: 'text' }) // For text search
+
 listingSchema.post('findOneAndDelete', async listing => {
   if (listing) {
     await Review.deleteMany({ _id: { $in: listing.reviews } })
