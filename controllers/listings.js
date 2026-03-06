@@ -17,6 +17,12 @@ module.exports.index = async (req, res) => {
   res.render('listings/index.ejs', { alllisting, selectedCategory: category || '', q });
 }
 
+module.exports.myListings = async (req, res) => {
+  // Queries by owner utilizing the owner index
+  const alllisting = await Listing.find({ owner: req.user._id });
+  res.render('listings/index.ejs', { alllisting, selectedCategory: '', q: '' });
+}
+
 module.exports.renderNewForm = (req, res) => {
   res.render('listings/new.ejs')
 }
