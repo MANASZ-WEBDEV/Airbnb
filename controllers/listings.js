@@ -10,14 +10,17 @@ module.exports.index = async (req, res) => {
     filter.category = { $in: [category] };
   }
   if (q && q.trim() !== '') {
-    // Search by location (city) or country, case-insensitive partial match
-    filter.$or = [
-      { location: { $regex: q, $options: 'i' } },
-      { country: { $regex: q, $options: 'i' } }
-    ];
+    // Utilize the text index for broad searching
+    filter.$text = { $search: q };
   }
   const alllisting = await Listing.find(filter);
   res.render('listings/index.ejs', { alllisting, selectedCategory: category || '', q });
+}
+
+module.exports.myListings = async (req, res) => {
+  // Queries by owner utilizing the owner index
+  const alllisting = await Listing.find({ owner: req.user._id });
+  res.render('listings/index.ejs', { alllisting, selectedCategory: '', q: '' });
 }
 
 module.exports.renderNewForm = (req, res) => {

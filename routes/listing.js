@@ -19,6 +19,9 @@ router
 // New Route - to show form to create new listing
 router.get('/new', isLoggedIn, listingController.renderNewForm)
 
+// My Listings Route - to show listings owned by the current user
+router.get('/my', isLoggedIn, wrapAsync(listingController.myListings))
+
 router
   .route('/:id')
   .get(wrapAsync(listingController.showListing))
